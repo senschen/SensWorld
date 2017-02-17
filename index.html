@@ -18,18 +18,18 @@
     </div>
 </div>
 <script src="static/js/jquery.min.js"></script>
-<!--<script src="static/js/MusicVisualizer.js"></script>-->
+<script src="static/js/MusicVisualizer.js"></script>
 <script src="static/js/makeSky.js"></script>
 <script>
     window.onload = function () {
-//        var mv = new MusicVisualizer({
-//            size: 128,
-//            visualizer: function (arr) {
-////            console.log(arr[0]);
-//            }
-//        });
-//
-//        mv.play('static/res/Routine.mp3');
+        var mv = new MusicVisualizer({
+            size: 128,
+            visualizer: function (arr) {
+//            console.log(arr[0]);
+            }
+        });
+
+        mv.play('static/res/Routine.mp3');
 
         makeSky.init();
 
