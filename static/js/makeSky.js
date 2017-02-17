@@ -150,7 +150,6 @@ var makeSky = (function (doc, window, addEvent) {
             stars[i].draw();
         }
 
-        console.log(w,h);
         REQ(function () {
             animation(w,h);
         });
