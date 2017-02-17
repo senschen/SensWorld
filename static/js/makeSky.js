@@ -150,7 +150,7 @@ var makeSky = (function (doc, window, addEvent) {
         }
 
         window.requestAnimationFrame(function () {
-            animation(w,h);
+            animation(cvs.width,cvs.height); //????不能传变量？
         });
     }
 
@@ -174,6 +174,7 @@ var makeSky = (function (doc, window, addEvent) {
     }
 
     function makeStars(w,h) {
+        count = 0;
         for (var i = 0; i < maxStars; i++) {
             new Star(w,h);
         }
