@@ -41,6 +41,7 @@ var addEvent = (function(window, undefined) {
 })(window);
 
 var makeSky = (function (doc, window, addEvent) {
+    var REQ = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
     var cvs = doc.getElementById('wrapper-cvs');
     var ctx = cvs.getContext('2d');
     cvs.width = doc.documentElement.clientWidth;
@@ -149,8 +150,9 @@ var makeSky = (function (doc, window, addEvent) {
             stars[i].draw();
         }
 
-        window.requestAnimationFrame(function () {
-            animation(cvs.width,cvs.height); //????不能传变量？
+        console.log(w,h);
+        REQ(function () {
+            animation(w,h);
         });
     }
 
@@ -169,7 +171,7 @@ var makeSky = (function (doc, window, addEvent) {
                 far += mouseAniSpeed;
             }
             stageBack.style.transform = 'translate3d(0,0,' + far + 'px)';
-            window.requestAnimationFrame(skyAnimation);
+            REQ(skyAnimation);
         }
     }
 
@@ -197,17 +199,21 @@ var makeSky = (function (doc, window, addEvent) {
         cvs.width = doc.documentElement.clientWidth;
         cvs.height = doc.documentElement.clientHeight;
         makeStars(cvs.width,cvs.height);
-        animation(cvs.width,cvs.height);
-        skyAnimation();
+        REQ(function () {
+            animation(cvs.width, cvs.height);
+            skyAnimation();
+        })
     }
     function restart() {
         flagRestartStar = true;
         flagRestartSky = true;
         cvs.width = doc.documentElement.clientWidth;
         cvs.height = doc.documentElement.clientHeight;
-        makeStars(cvs.width,cvs.height);
-        animation(cvs.width,cvs.height);
-        skyAnimation();
+        makeStars(cvs.width, cvs.height);
+        REQ(function () {
+            animation(cvs.width, cvs.height);
+            skyAnimation();
+        })
     }
 
     return {
