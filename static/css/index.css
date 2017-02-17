@@ -1,0 +1,59 @@
+.wrapper-block{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #060E1B;
+    overflow: hidden;
+    perspective: 1000px;
+    perspective-origin: 50% 50%;
+}
+.wrapper-img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    vertical-align: top;
+    z-index: 10;
+    opacity: .5;
+}
+.wrapper-cvs{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+.stage-block-back{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: translate3d(0,0,0);
+    z-index: 20;
+}
+.stage-block-main{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: translate3d(0,0,-100000px);
+    z-index: 20;
+}
+
+.stage-box-earth{
+    background: url("../img/earth.png") no-repeat center;
+    width: 408px;
+    height: 408px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform:translate(-50%,-50%);
+    border-radius: 50%;
+}

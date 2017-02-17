@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <title>Sens World</title>
+    <link rel="stylesheet" href="static/css/index.css" />
+</head>
+<body>
+<div class="wrapper-block">
+    <div id="j-stage-block-back" class="stage-block-back">
+        <img src="static/img/back.jpg" ondragstart="return false" class="wrapper-img"/>
+        <canvas id="wrapper-cvs" class="wrapper-cvs"></canvas>
+    </div>
+    <div class="stage-block-main">
+        <div class="stage-box-earth"></div>
+    </div>
+</div>
+<script src="static/js/jquery.min.js"></script>
+<script src="static/js/MusicVisualizer.js"></script>
+<script src="static/js/makeSky.js"></script>
+<script>
+    window.onload = function () {
+        var mv = new MusicVisualizer({
+            size: 128,
+            visualizer: function (arr) {
+//            console.log(arr[0]);
+            }
+        });
+
+        mv.play('static/res/Routine.mp3');
+
+        makeSky.init();
+
+        var timeSeed = 0;
+        window.onresize = function () {
+            timeSeed && clearTimeout(timeSeed);
+            timeSeed = setTimeout(function () {
+                makeSky.restart();
+            },200);
+        }
+    };
+</script>
+</body>
+</html>
