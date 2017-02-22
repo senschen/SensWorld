@@ -8,6 +8,33 @@
     <link rel="stylesheet" href="static/css/index.css" />
 </head>
 <body>
+<div class="preload-block">
+    <img src="static/img/back.jpg" />
+</div>
+
+<div class="welcome-block j-welcome-block">
+    <div class="welcome-block-main rel">
+        <div class="welcome-box-center j-welcome-box-center">
+            <span class="welcome-text j-welcome-text line1">额，趁现在资源还在加载</span>
+            <span class="welcome-text j-welcome-text line2">我先给你讲一个冷笑话</span>
+            <span class="welcome-text j-welcome-text line3">有一个叫程思序的人</span>
+            <span class="welcome-text j-welcome-text line4">整天思程序</span>
+            <span class="welcome-text j-welcome-text line5">．．．．．．</span>
+            <span class="welcome-text j-welcome-text line6">好尴尬，我们来看看资源加载完没有</span>
+            <span class="welcome-text j-welcome-text line7 fail">哇塞，居然没加载完！</span>
+            <span class="welcome-text j-welcome-text line7 success">哇塞，已经加载完了！</span>
+            <span class="welcome-text j-welcome-text line8 fail">不管了，直接开始吧！</span>
+            <span class="welcome-text j-welcome-text line8 success">那我们就立刻开始吧！</span>
+            <span class="welcome-text-line">|</span>
+            <div class="welcome-btn-start"></div>
+        </div>
+
+        <div class="welcome-box-btn j-welcome-box-btn hide">
+            <input placeholder="" type="checkbox">
+            <span class="welcome-btn"></span>
+        </div>
+    </div>
+</div>
 <div class="wrapper-block">
     <div id="j-stage-block-back" class="stage-block-back">
         <img src="static/img/back.jpg" ondragstart="return false" class="wrapper-img"/>
@@ -17,30 +44,98 @@
         <div class="stage-box-earth"></div>
     </div>
 </div>
-<script src="static/js/jquery.min.js"></script>
+<!--<script src="static/js/jquery.min.js"></script>-->
 <script src="static/js/MusicVisualizer.js"></script>
 <script src="static/js/makeSky.js"></script>
 <script>
     window.onload = function () {
-//        var mv = new MusicVisualizer({
-//            size: 128,
-//            visualizer: function (arr) {
-////            console.log(arr[0]);
-//            }
-//        });
-//
-//        mv.play('static/res/Routine.mp3');
+        var step = 0;
+        var isLoaded = false;
 
-        makeSky.init();
+        var mv = new MusicVisualizer({
+            size: 128,
+            visualizer: function (arr) {
+            }
+        });
 
-        var timeSeed = 0;
-        window.onresize = function () {
-            timeSeed && clearTimeout(timeSeed);
-            timeSeed = setTimeout(function () {
-                makeSky.restart();
-            },200);
+        mv.play('static/res/Routine.mp3',function () {
+            isLoaded = true;
+            if(step > 0){
+                mv.start();
+            }
+        });
+
+
+        var welComeText = document.getElementsByClassName('j-welcome-text');
+        [].forEach.call(welComeText,function (item) {
+            item.classList.add('play');
+        });
+
+
+        setTimeout(function () {
+            var _removeFlagStr = isLoaded ? 'fail' : 'success';
+            [].forEach.call(welComeText, function (item) {
+                if (item.classList.contains(_removeFlagStr)) {
+                    item.remove();
+                }
+            });
+        },13000);
+        //welcome-box-center
+        setTimeout(function () {
+            document.getElementsByClassName('j-welcome-box-center')[0].classList.add('die');
+            setTimeout(function () {
+                document.getElementsByClassName('j-welcome-box-center')[0].remove();
+                document.getElementsByClassName('j-welcome-box-btn')[0].classList.remove('hide');
+                document.getElementsByClassName('j-welcome-box-btn')[0].classList.add('show');
+            },1800);
+        },17000);
+
+        document.getElementsByClassName('j-welcome-box-btn')[0].addEventListener('mouseup',function () {
+            var docElm = document.documentElement;
+            //W3C
+            if (docElm.requestFullscreen) {
+                docElm.requestFullscreen();
+            }
+            //FireFox
+            else if (docElm.mozRequestFullScreen) {
+                docElm.mozRequestFullScreen();
+            }
+            //Chrome等
+            else if (docElm.webkitRequestFullScreen) {
+                docElm.webkitRequestFullScreen();
+            }
+            //IE11
+            else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            }
+            step2();
+            step2 = null;
+        });
+
+        function step2() {
+            step = 1;
+
+            if(isLoaded){
+                mv.start();
+            }
+
+            document.getElementsByClassName('j-welcome-block')[0].classList.add('fadeout');
+            makeSky.init();
+
+            var timeSeed = 0;
+            window.onresize = function () {
+                timeSeed && clearTimeout(timeSeed);
+                timeSeed = setTimeout(function () {
+                    makeSky.restart();
+                }, 200);
+            };
+
+            setTimeout(function () {
+                document.getElementsByClassName('j-welcome-block')[0].remove();
+            }, 2000);
         }
     };
+
 </script>
 </body>
 </html>

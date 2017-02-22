@@ -41,7 +41,7 @@ MusicVisualizer.prototype = {
             console.error(err);
         });
     },
-    play: function (url) {
+    play: function (url,callback) {
         var self = this;
         var n = ++this.count;
         this.source && this.stop();
@@ -52,10 +52,13 @@ MusicVisualizer.prototype = {
                 bs.loop = true;
                 bs.connect(self.analyser);
                 bs.buffer = buffer;
-                bs[bs.start ? "start" : "noteOn"](0);
                 self.source = bs;
+                callback && callback();
             })
         });
+    },
+    start: function () {
+        this.source[this.source.start ? "start" : "noteOn"](0);
     },
     stop: function () {
         this.source[this.source.stop ? "stop" : "noteOff"](0);

@@ -1,3 +1,245 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: "Microsoft YaHei", sans-serif;
+}
+.hide{
+    display: none;
+}
+.rel{
+    position: relative;
+}
+.preload-block img{
+    display: inline-block!important;
+    width: 0!important;
+    height: 0!important;
+    visibility: hidden!important;
+    line-height: 0!important;
+    box-sizing: border-box!important;
+}
+
+.welcome-block{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background: #DADCDF;
+    transition: all 2s;
+}
+.welcome-block.fadeout{
+    opacity: 0;
+}
+.welcome-block-main{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #333;
+    z-index: 10;
+    text-align: center;
+}
+.welcome-block-main:after{
+    display: inline-block;
+    height: 100%;
+    content: '';
+    vertical-align: middle;
+}
+.welcome-box-center{
+    width: 320px;
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    /*margin: auto;*/
+    font-size: 0;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+.welcome-box-center.die {
+    transition: all 2s;
+    transform: rotate(1800deg) scale(0,0);
+}
+.welcome-text{
+    display: inline-block;
+    width: 0;
+    overflow: hidden;
+    vertical-align: top;
+    font-size: 20px;
+    white-space: nowrap;
+}
+.line1.play{
+    animation: lineShow1 3s forwards;
+    animation-timing-function: steps(1,end);
+}
+.line2.play{
+    animation: lineShow2 1.5s forwards 3s;
+    animation-timing-function: steps(10,end);
+}
+.line3.play{
+    animation: lineShow3 1.8s forwards 5s;
+    animation-timing-function: steps(9,end);
+}
+.line4.play{
+    animation: lineShow4 1s forwards 7s;
+    animation-timing-function: steps(5,end);
+}
+.line5.play{
+    animation: lineShow5 1.5s forwards 9s;
+    animation-timing-function: steps(6,end);
+}
+.line6.play{
+    animation: lineShow6 2s forwards 11s;
+    animation-timing-function: steps(16,end);
+}
+.line7.play{
+    animation: lineShow7 1s forwards 14s;
+    animation-timing-function: steps(10,end);
+}
+.line8.play{
+    animation: lineShow8 1s forwards 15s;
+    animation-timing-function: steps(10,end);
+}
+
+@keyframes lineShow1 {
+    0%{
+        width: 0;
+    }
+    10%{
+        width: 1em;
+    }
+    20%{
+        width: 2em;
+    }
+    60%{
+        width: 3em;
+    }
+    65%{
+        width: 4em;
+    }
+    70%{
+        width: 5em;
+    }
+    75%{
+        width: 6em;
+    }
+    80%{
+        width: 7em;
+    }
+    85%{
+        width: 8em;
+    }
+    90%{
+        width: 9em;
+    }
+    95%{
+        width: 10em;
+    }
+    99.99%{
+        width: 11em;
+    }
+    100%{
+        width: 100%;
+    }
+}
+@keyframes lineShow2 {
+    0%{
+        width: 0;
+    }
+    99.99%{
+        width: 10em;
+    }
+    100%{
+        width: 100%;
+    }
+}
+@keyframes lineShow3 {
+    0%{
+        width: 0;
+    }
+    99.99%{
+        width: 9em;
+    }
+    100%{
+        width: 100%;
+    }
+}
+@keyframes lineShow4 {
+    0%{
+        width: 0;
+    }
+    99.99%{
+        width: 5em;
+    }
+    100%{
+        width: 100%;
+    }
+}
+@keyframes lineShow5 {
+    0%{
+        width: 0;
+    }
+    99.99%{
+        width: 6em;
+    }
+    100%{
+        width: 100%;
+    }
+}
+@keyframes lineShow6 {
+    0%{
+        width: 0;
+    }
+    99.99%{
+        width: 16em;
+    }
+    100%{
+        width: 100%;
+    }
+}
+@keyframes lineShow7 {
+    0%{
+        width: 0;
+    }
+    99.99%{
+        width: 10em;
+    }
+    100%{
+        width: 100%;
+    }
+}
+@keyframes lineShow8 {
+    0%{
+        width: 0;
+    }
+    99.99%{
+        width: 10em;
+    }
+    100%{
+        width: 100%;
+    }
+}
+
+.welcome-text-line{
+    animation: lineBling 1s infinite;
+    animation-timing-function: steps(2,end);
+    opacity: 1;
+    font-size: 20px;
+}
+@keyframes lineBling {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
 .wrapper-block{
     position: fixed;
     width: 100%;
@@ -14,6 +256,7 @@
     top: 0;
     left: 0;
     width: 100%;
+    min-height: 100%;
     vertical-align: top;
     z-index: 10;
     opacity: .5;
@@ -56,4 +299,74 @@
     -ms-transform: translate(-50%,-50%);
     transform:translate(-50%,-50%);
     border-radius: 50%;
+}
+
+
+.welcome-box-btn {
+    display: inline-block;
+    box-shadow:
+            inset 0 0 35px 5px rgba(0, 0, 0, 0.25),
+            inset 0 2px 1px 1px rgba(255, 255, 255, 0.9),
+            inset 0 -2px 1px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    background: #ccd0d4;
+    position: relative;
+    height: 140px;
+    width: 140px;
+    top: -1000px;
+    transition: top 1s;
+}
+.welcome-box-btn.show{
+    top: 0;
+}
+
+.welcome-btn {
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    filter: blur(1px);
+    transition: all 300ms ease;
+    box-shadow:
+            0 15px 25px -4px rgba(0, 0, 0, 0.5),
+            inset 0 -3px 4px -1px rgba(0, 0, 0, 0.2),
+            0 -10px 15px -1px rgba(255, 255, 255, 0.6),
+            inset 0 3px 4px -1px rgba(255, 255, 255, 0.2),
+            inset 0 0 5px 1px rgba(255, 255, 255, 0.8),
+            inset 0 20px 30px 0 rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    position: absolute;
+    background: #ccd0d4;
+    margin-left: -48.16px;
+    margin-top: -48.16px;
+    display: block;
+    height: 96.32px;
+    width: 96.32px;
+    left: 50%;
+    top: 50%;
+}
+.welcome-box-btn input {
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+.welcome-box-btn input:active ~ .welcome-btn {
+    box-shadow:
+            0 15px 25px -4px rgba(0, 0, 0, 0.4),
+            inset 0 -8px 30px 1px rgba(255, 255, 255, 0.9),
+            0 -10px 15px -1px rgba(255, 255, 255, 0.6),
+            inset 0 8px 25px 0 rgba(0, 0, 0, 0.4),
+            inset 0 0 10px 1px rgba(255, 255, 255, 0.6);
+}
+
+.welcome-box-btn input:focus ~ .welcome-btn {
+    box-shadow:
+            0 15px 25px -4px rgba(0, 0, 0, 0.4),
+            inset 0 -8px 25px -1px rgba(255, 255, 255, 0.9),
+            0 -10px 15px -1px rgba(255, 255, 255, 0.6),
+            inset 0 8px 20px 0 rgba(0, 0, 0, 0.2),
+            inset 0 0 5px 1px rgba(255, 255, 255, 0.6);
 }
