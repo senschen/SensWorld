@@ -49,7 +49,7 @@
 <script src="static/js/MusicVisualizer.js"></script>
 <script src="static/js/makeSky.js"></script>
 <script>
-    window.onload = function () {
+    (function () {
         var step = 0;
         var isLoaded = false;
 
@@ -135,7 +135,7 @@
                 document.getElementsByClassName('j-welcome-block')[0].remove();
             }, 2000);
         }
-    };
+    })();
 
 </script>
 </body>
