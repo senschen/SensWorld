@@ -32,6 +32,7 @@
         <div class="welcome-box-btn j-welcome-box-btn hide">
             <input placeholder="" type="checkbox">
             <span class="welcome-btn"></span>
+            <p class="welcome-text-tip">接下来记得使用滚轮哟</p>
         </div>
     </div>
 </div>
@@ -79,7 +80,7 @@
                     item.remove();
                 }
             });
-        },13000);
+        },8000);
         //welcome-box-center
         setTimeout(function () {
             document.getElementsByClassName('j-welcome-box-center')[0].classList.add('die');
@@ -88,7 +89,7 @@
                 document.getElementsByClassName('j-welcome-box-btn')[0].classList.remove('hide');
                 document.getElementsByClassName('j-welcome-box-btn')[0].classList.add('show');
             },1800);
-        },17000);
+        },11000);
 
         document.getElementsByClassName('j-welcome-box-btn')[0].addEventListener('mouseup',function () {
             var docElm = document.documentElement;

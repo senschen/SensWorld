@@ -74,35 +74,35 @@ html,body{
     white-space: nowrap;
 }
 .line1.play{
-    animation: lineShow1 3s forwards;
+    animation: lineShow1 2s forwards;
     animation-timing-function: steps(1,end);
 }
 .line2.play{
-    animation: lineShow2 1.5s forwards 3s;
+    animation: lineShow2 1s forwards 2s;
     animation-timing-function: steps(10,end);
 }
 .line3.play{
-    animation: lineShow3 1.8s forwards 5s;
+    animation: lineShow3 1s forwards 3.5s;
     animation-timing-function: steps(9,end);
 }
 .line4.play{
-    animation: lineShow4 1s forwards 7s;
+    animation: lineShow4 .5s forwards 5s;
     animation-timing-function: steps(5,end);
 }
 .line5.play{
-    animation: lineShow5 1.5s forwards 9s;
+    animation: lineShow5 1s forwards 6s;
     animation-timing-function: steps(6,end);
 }
 .line6.play{
-    animation: lineShow6 2s forwards 11s;
+    animation: lineShow6 1s forwards 7s;
     animation-timing-function: steps(16,end);
 }
 .line7.play{
-    animation: lineShow7 1s forwards 14s;
+    animation: lineShow7 1s forwards 8.5s;
     animation-timing-function: steps(10,end);
 }
 .line8.play{
-    animation: lineShow8 1s forwards 15s;
+    animation: lineShow8 1s forwards 9.5s;
     animation-timing-function: steps(10,end);
 }
 
@@ -369,4 +369,16 @@ html,body{
             0 -10px 15px -1px rgba(255, 255, 255, 0.6),
             inset 0 8px 20px 0 rgba(0, 0, 0, 0.2),
             inset 0 0 5px 1px rgba(255, 255, 255, 0.6);
+}
+
+.welcome-text-tip{
+    position: absolute;
+    white-space: nowrap;
+    bottom: -120px;
+    font-size: 30px;
+    background-image: -webkit-gradient(linear, left 0, right 0, from(rgba(0, 128, 0, 1)), to(rgba(51, 51, 51, 1)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform: translate(-50%,0);
+    left: 50%;
 }
