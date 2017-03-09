@@ -376,9 +376,19 @@ html,body{
     white-space: nowrap;
     bottom: -120px;
     font-size: 30px;
-    background-image: -webkit-gradient(linear, left 0, right 0, from(rgba(0, 128, 0, 1)), to(rgba(51, 51, 51, 1)));
+    background-image: -webkit-linear-gradient(left, #147B96, #ff6900 25%, #147B96 50%, #ff6900 75%, #147B96);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transform: translate(-50%,0);
     left: 50%;
+    -webkit-background-size: 200% 100%;
+    animation: masked 1s infinite linear;
+}
+@keyframes masked {
+    0%  {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -100% 0;
+    }
 }
