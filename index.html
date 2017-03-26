@@ -49,7 +49,33 @@
 <script src="static/js/MusicVisualizer.js"></script>
 <script src="static/js/makeSky.js"></script>
 <script>
-    (function () {
+    var Cookie = (function () {
+        function setCookie(name, value, day) {
+            var oDate = new Date();
+            oDate.setDate(oDate.getDate() + day);
+            document.cookie = name + '=' + value + ';expires=' + oDate;
+        }
+        function delCookie(name) {
+            setCookie(name, 1, -1);
+        }
+        function getCookie(name) {
+            var arr = document.cookie.split('; ');
+            for(var i = 0; i < arr.length; i++) {
+                var arrName = arr[i].split('=');
+                if(arrName[0] == name) {
+                    return arrName[1];
+                }
+            }
+            return '';
+        }
+        return {
+            set: setCookie,
+            del: delCookie,
+            get: getCookie
+        }
+    })();
+
+    (function (Cookie) {
         var step = 0;
         var isLoaded = false;
 
@@ -58,7 +84,6 @@
             visualizer: function (arr) {
             }
         });
-
         mv.play('static/res/Routine.mp3',function () {
             isLoaded = true;
             if(step > 0){
@@ -66,40 +91,45 @@
             }
         });
 
-
-        var welComeText = document.getElementsByClassName('j-welcome-text');
-        [].forEach.call(welComeText,function (item) {
-            item.classList.add('play');
-        });
-
-
-        setTimeout(function () {
-            var _removeFlagStr = isLoaded ? 'fail' : 'success';
-            [].forEach.call(welComeText, function (item) {
-                if (item.classList.contains(_removeFlagStr)) {
-                    item.remove();
-                }
+        if(!Cookie.get('finished')){
+            var welComeText = document.getElementsByClassName('j-welcome-text');
+            [].forEach.call(welComeText,function (item) {
+                item.classList.add('play');
             });
-        },8000);
-        //welcome-box-center
-        setTimeout(function () {
-            document.getElementsByClassName('j-welcome-box-center')[0].classList.add('die');
-            setTimeout(function () {
-                document.getElementsByClassName('j-welcome-box-center')[0].remove();
-                document.getElementsByClassName('j-welcome-box-btn')[0].classList.remove('hide');
-                document.getElementsByClassName('j-welcome-box-btn')[0].classList.add('show');
-            },1800);
-        },11000);
 
-        document.getElementsByClassName('j-welcome-box-btn')[0].addEventListener('mouseup',function () {
+            setTimeout(function () {
+                var _removeFlagStr = isLoaded ? 'fail' : 'success';
+                [].forEach.call(welComeText, function (item) {
+                    if (item.classList.contains(_removeFlagStr)) {
+                        item.remove();
+                    }
+                });
+            },8000);
+            //welcome-box-center
+            setTimeout(function () {
+                document.getElementsByClassName('j-welcome-box-center')[0].classList.add('die');
+                setTimeout(function () {
+                    document.getElementsByClassName('j-welcome-box-center')[0].remove();
+                    document.getElementsByClassName('j-welcome-box-btn')[0].classList.remove('hide');
+                    document.getElementsByClassName('j-welcome-box-btn')[0].classList.add('show');
+                },1800);
+            },11000);
+        }
+        else {
+            document.getElementsByClassName('j-welcome-box-center')[0].remove();
+            document.getElementsByClassName('j-welcome-box-btn')[0].classList.remove('hide');
+            document.getElementsByClassName('j-welcome-box-btn')[0].classList.add('show');
+        }
+
+
+        document.getElementsByClassName('j-welcome-box-btn')[0].addEventListener('click',function () {
+            if(!Cookie.get('finished')){
+                Cookie.set('finished','1',1);
+            }
             var docElm = document.documentElement;
             //W3C
             if (docElm.requestFullscreen) {
                 docElm.requestFullscreen();
-            }
-            //FireFox
-            else if (docElm.mozRequestFullScreen) {
-                docElm.mozRequestFullScreen();
             }
             //Chrome等
             else if (docElm.webkitRequestFullScreen) {
@@ -121,7 +151,9 @@
             }
 
             document.getElementsByClassName('j-welcome-block')[0].classList.add('fadeout');
-            makeSky.init();
+            makeSky.init(function (far) {
+                console.log(far);
+            });
 
             var timeSeed = 0;
             window.onresize = function () {
@@ -135,7 +167,7 @@
                 document.getElementsByClassName('j-welcome-block')[0].remove();
             }, 2000);
         }
-    })();
+    })(Cookie);
 
 </script>
 </body>
