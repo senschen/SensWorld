@@ -75,7 +75,29 @@
         }
     })();
 
-    (function (Cookie) {
+    var runPrefixMethod = function(element, method) {
+        var usablePrefixMethod;
+        ["webkit", "moz", "ms", "o", ""].forEach(function(prefix) {
+            if (usablePrefixMethod) return;
+            if (prefix === "") {
+                method = method.slice(0,1).toLowerCase() + 	method.slice(1);
+            }
+
+            var typePrefixMethod = typeof element[prefix + method];
+
+            if (typePrefixMethod + "" !== "undefined") {
+                if (typePrefixMethod === "function") {
+                    usablePrefixMethod = element[prefix + method]();
+                } else {
+                    usablePrefixMethod = element[prefix + method];
+                }
+            }
+        });
+
+        return usablePrefixMethod;
+    };
+
+    (function (Cookie,runPrefixMethod) {
         var step = 0;
         var isLoaded = false;
 
@@ -121,24 +143,11 @@
             document.getElementsByClassName('j-welcome-box-btn')[0].classList.add('show');
         }
 
-
         document.getElementsByClassName('j-welcome-box-btn')[0].addEventListener('click',function () {
             if(!Cookie.get('finished')){
                 Cookie.set('finished','1',1);
             }
-            var docElm = document.documentElement;
-            //W3C
-            if (docElm.requestFullscreen) {
-                docElm.requestFullscreen();
-            }
-            //Chrome等
-            else if (docElm.webkitRequestFullScreen) {
-                docElm.webkitRequestFullScreen();
-            }
-            //IE11
-            else if (elem.msRequestFullscreen) {
-                elem.msRequestFullscreen();
-            }
+            runPrefixMethod(document.documentElement, "RequestFullScreen");
             step2();
             step2 = null;
         });
@@ -167,8 +176,16 @@
                 document.getElementsByClassName('j-welcome-block')[0].remove();
             }, 2000);
         }
-    })(Cookie);
 
+        document.body.addEventListener("dblclick", function() {
+            if (runPrefixMethod(document, "FullScreen") || runPrefixMethod(document, "IsFullScreen")) {
+                runPrefixMethod(document, "CancelFullScreen");
+            } else {
+                runPrefixMethod(document.documentElement, "RequestFullScreen");
+            }
+        });
+
+    })(Cookie,runPrefixMethod);
 </script>
 </body>
 </html>
