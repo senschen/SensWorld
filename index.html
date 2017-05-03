@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="preload-block">
-    <img src="static/img/back.jpg" />
+    <img src="http://i2.muimg.com/4851/24d05b63045ffd02.jpg" />
 </div>
 
 <div class="welcome-block j-welcome-block">
@@ -38,16 +38,23 @@
 </div>
 <div class="wrapper-block">
     <div id="j-stage-block-back" class="stage-block-back">
-        <img src="static/img/back.jpg" ondragstart="return false" class="wrapper-img"/>
+        <img src="http://i2.muimg.com/4851/24d05b63045ffd02.jpg" ondragstart="return false" class="wrapper-img"/>
         <canvas id="wrapper-cvs" class="wrapper-cvs"></canvas>
     </div>
-    <div class="stage-block-main">
-        <div class="stage-box-earth"></div>
+</div>
+<div class="wrapper-block-main j-wrapper-block-main">
+    <div class="stage-block-main j-stage-block-main">
+        <div class="stage-box-earth j-stage-box-earth">
+            <img src="http://i2.muimg.com/4851/30acc09acf1e627f.png" alt="" class="j-stage-img-earth">
+        </div>
+        <div class="wrapper-box-link">呵呵</div>
     </div>
 </div>
-<!--<script src="static/js/jquery.min.js"></script>-->
+
+<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
 <script src="static/js/MusicVisualizer.js"></script>
 <script src="static/js/makeSky.js"></script>
+<script src="static/js/breakImg.js"></script>
 <script>
     var Cookie = (function () {
         function setCookie(name, value, day) {
@@ -100,10 +107,36 @@
     (function (Cookie,runPrefixMethod) {
         var step = 0;
         var isLoaded = false;
+        var lastSum = 0;
 
         var mv = new MusicVisualizer({
             size: 128,
             visualizer: function (arr) {
+                if(step === 3) return;
+                var sum = arr.reduce(function (prevResult, item) {
+                    return prevResult + item;
+                });
+                if (sum > 5000) {
+                    if(lastSum - sum > 500){
+                        $('.j-wrapper-block-main').css({
+                            'transform': 'scale(0.5)'
+                        });
+
+                        lastSum = sum;
+                    }
+                    else if(sum - lastSum > 200){
+                        $('.j-wrapper-block-main').css({
+                            'transform': 'scale(' + (0.5 + 2*(sum - lastSum) / 10000) + ')'
+                        });
+                        lastSum= sum;
+                    }
+                }
+                else {
+                    $('.j-wrapper-block-main').css({
+                        'transform': 'scale(0.5)'
+                    });
+                    lastSum = sum;
+                }
             }
         });
         mv.play('static/res/Routine.mp3',function () {
@@ -161,7 +194,31 @@
 
             document.getElementsByClassName('j-welcome-block')[0].classList.add('fadeout');
             makeSky.init(function (far) {
-                console.log(far);
+                if (step === 1 && far > 200) {
+                    step = 2;
+                    $('.j-wrapper-block-main').css({
+                        'z-index': '20'
+                    });
+                    $('.j-stage-block-main').css({
+                        'transform': 'translate3d(0,0,0)'
+                    });
+                    $('.j-stage-box-earth').click(function () {
+                        step = 3;
+                        var $this = $(this);
+                        if ($this.hasClass('no')) return;
+                        $this.addClass('shake no');
+                        var bi = new MakeBreakImg({
+                            el: $('.j-stage-img-earth')
+                        });
+                        setTimeout(function () {
+                            bi.makeBreak();
+                            setTimeout(function () {
+                                $('.j-wrapper-block-main').remove();
+                            }, 1000);
+                        }, 1000);
+                    });
+
+                }
             });
 
             var timeSeed = 0;

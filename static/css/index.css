@@ -4,8 +4,16 @@ html,body{
     font-size: 14px;
     font-family: "Microsoft YaHei", sans-serif;
 }
+body *{
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
 .hide{
     display: none;
+}
+img{
+    vertical-align: top;
 }
 .rel{
     position: relative;
@@ -277,6 +285,18 @@ html,body{
     transform: translate3d(0,0,0);
     z-index: 20;
 }
+
+.wrapper-block-main{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    perspective: 100000px;
+    perspective-origin: 50% 50%;
+    z-index: -1;
+    transition: all 0.1s;
+}
 .stage-block-main{
     position: absolute;
     left: 0;
@@ -284,12 +304,11 @@ html,body{
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
-    transform: translate3d(0,0,-100000px);
-    z-index: 20;
+    transition: all 1s;
+    transform: translate3d(0,0,-10000000px);
 }
 
 .stage-box-earth{
-    background: url("../img/earth.png") no-repeat center;
     width: 408px;
     height: 408px;
     position: absolute;
@@ -299,6 +318,33 @@ html,body{
     -ms-transform: translate(-50%,-50%);
     transform:translate(-50%,-50%);
     border-radius: 50%;
+    cursor: pointer;
+}
+.stage-box-earth.shake{
+    animation-name:anishake;
+    animation-duration: .2s;
+    animation-timing-function:linear;
+    animation-iteration-count: 5;
+    -webkit-animation-name:anishake;
+    -webkit-animation-duration: .2s;
+    -webkit-animation-timing-function:linear;
+    -webkit-animation-iteration-count: 5
+}
+@keyframes anishake
+{
+    0%  {transform: translate(-50%,-50%) rotate(0deg);}
+    25% {transform: translate(-70%,-50%) rotate(10deg);}
+    50% {transform: translate(-50%,-50%) rotate(0deg);}
+    75% {transform: translate(-30%,-50%) rotate(-10deg);}
+    100%{transform: translate(-50%,-50%) rotate(0deg);}
+}
+@-webkit-keyframes anishake
+{
+    0%  {transform: translate(-50%,-50%) rotate(0deg);}
+    25% {transform: translate(-70%,-50%) rotate(10deg);}
+    50% {transform: translate(-50%,-50%) rotate(0deg);}
+    75% {transform: translate(-30%,-50%) rotate(-10deg);}
+    100%{transform: translate(-50%,-50%) rotate(0deg);}
 }
 
 
@@ -391,4 +437,10 @@ html,body{
     100% {
         background-position: -100% 0;
     }
+}
+
+.wrapper-box-link{
+    position: fixed;
+    z-index: 100;
+    left: 50%;
 }
