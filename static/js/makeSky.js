@@ -44,6 +44,9 @@ var addEvent = (function(window, undefined) {  //强行模仿jQuery源码 - -
 var makeSky = (function (doc, window, addEvent) {
     //还是兼容一下国产浏览器用低版本chrome内核的情况吧。。。
     var REQ = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
+    var cancelREQ = window.cancelRequestAnimationFrame || window.webkitCancelRequestAnimationFrame;
+    var tReq = null;
+    var flagStop = false;
 
     var cvs = doc.getElementById('wrapper-cvs');
     var ctx = cvs.getContext('2d');
@@ -194,7 +197,7 @@ var makeSky = (function (doc, window, addEvent) {
                 onplayFunc && onplayFunc(far);
                 timestampRunEvent = +new Date();
             }
-            REQ(skyAnimation);
+            tReq = REQ(skyAnimation);
         }
     }
 
@@ -210,6 +213,7 @@ var makeSky = (function (doc, window, addEvent) {
             onplayFunc = onplay;
         }
         addEvent(doc.body, "mousewheel", function (event) {
+            if(flagStop) return;
             if (event.delta < 0 && far < 800) {
                 clearTimeout(synMouseWheel);
                 synMouseWheel = setTimeout(function () {
@@ -241,10 +245,22 @@ var makeSky = (function (doc, window, addEvent) {
             skyAnimation();
         })
     }
+    function stop() {
+        cancelREQ(tReq);
+        flagStop = true;
+    }
+    function backToStart(fun) {
+        stageBack.style.transition = 'all 1s';
+        stop();
+        stageBack.style.transform = 'translate3d(0,0,0)';
+        setTimeout(fun,1000);
+    }
 
     return {
         init: init,
-        restart: restart
+        restart: restart,
+        stop: stop,
+        backToStart: backToStart
     };
 
 })(document, window, addEvent);

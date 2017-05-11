@@ -36,7 +36,7 @@
         </div>
     </div>
 </div>
-<div class="wrapper-block">
+<div id="j-wrapper-block-back" class="wrapper-block">
     <div id="j-stage-block-back" class="stage-block-back">
         <img src="http://i2.muimg.com/4851/24d05b63045ffd02.jpg" ondragstart="return false" class="wrapper-img"/>
         <canvas id="wrapper-cvs" class="wrapper-cvs"></canvas>
@@ -210,12 +210,12 @@
                         var bi = new MakeBreakImg({
                             el: $('.j-stage-img-earth')
                         });
-                        setTimeout(function () {
+                        makeSky.backToStart(function () {
                             bi.makeBreak();
                             setTimeout(function () {
                                 $('.j-wrapper-block-main').remove();
                             }, 1000);
-                        }, 1000);
+                        });
                     });
 
                 }
