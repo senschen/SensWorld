@@ -38,7 +38,7 @@
 </div>
 <div id="j-wrapper-block-back" class="wrapper-block">
     <div id="j-stage-block-back" class="stage-block-back">
-        <img src="http://i2.muimg.com/4851/24d05b63045ffd02.jpg" ondragstart="return false" class="wrapper-img"/>
+        <img src="http://i2.muimg.com/4851/24d05b63045ffd02.jpg" ondragstart="return false" class="wrapper-img j-wrapper-img-back"/>
         <canvas id="wrapper-cvs" class="wrapper-cvs"></canvas>
     </div>
 </div>
@@ -207,11 +207,20 @@
                         var $this = $(this);
                         if ($this.hasClass('no')) return;
                         $this.addClass('shake no');
-                        var bi = new MakeBreakImg({
+                        var bi1 = new MakeBreakImg({
                             el: $('.j-stage-img-earth')
                         });
+                        var bi2 = new MakeBreakImg({
+                            el:  $('.j-wrapper-img-back'),
+                            strStyle: 'position: relative;z-index: 10;opacity: 0.5'
+                        });
+
                         makeSky.backToStart(function () {
-                            bi.makeBreak();
+                            $('#j-wrapper-block-back').css('perspective','none');
+
+                            bi1.makeBreak();
+                            bi2.makeBreak();
+
                             setTimeout(function () {
                                 $('.j-wrapper-block-main').remove();
                             }, 1000);

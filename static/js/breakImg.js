@@ -11,6 +11,7 @@ function MakeBreakImg(obj) {
         this.wid = this.el.width();
         this.hei = this.el.height();
     }
+    this.strStyle = obj.strStyle;
     this.itemSpl = obj.itemSpl || 5;
     this.itemWid = this.wid / this.itemSpl;
     this.itemSplSub = Math.ceil(this.hei / this.itemWid);
@@ -36,6 +37,7 @@ MakeBreakImg.prototype = {
                 perspective: '10000px',
                 perspectiveOrigin: '50% 50%'
             });
+            _$dom[0].style.cssText = _$dom[0].style.cssText + obj.strStyle;
             obj.cont = _$dom;
         }
         for (var j = 0; j < obj.itemSplSub; j++) {
