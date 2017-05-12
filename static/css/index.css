@@ -3,6 +3,7 @@ html,body{
     padding: 0;
     font-size: 14px;
     font-family: "Microsoft YaHei", sans-serif;
+    background-color: #000;
 }
 body *{
     user-select: none;
@@ -443,4 +444,15 @@ img{
     position: fixed;
     z-index: 100;
     left: 50%;
+}
+
+
+
+.intro-block{
+    overflow: hidden;
+    perspective: 1000px;
+    perspective-origin: 10px 50%;
+}
+.display-block{
+    color: #fff;
 }

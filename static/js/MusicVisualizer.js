@@ -13,6 +13,10 @@ function MusicVisualizer(obj) {
     this.gainNode = this.audioCtx[this.audioCtx.createGain ? "createGain" : "createGainNode"]();
     this.gainNode.connect(this.audioCtx.destination);
 
+    // this.filter = this.audioCtx.createBiquadFilter();
+    // this.filter.frequency.value = 800;
+    // this.filter.connect(this.gainNode);
+
     this.analyser.connect(this.gainNode);
 
     this.xhr = new XMLHttpRequest();
@@ -81,5 +85,9 @@ MusicVisualizer.prototype = {
         }
 
         requestAnimationFrame(v);
+    },
+    slow: function () {
+        var self = this;
+        self.source.playbackRate.value = 0.5;
     }
 };

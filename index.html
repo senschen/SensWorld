@@ -36,19 +36,29 @@
         </div>
     </div>
 </div>
-<div id="j-wrapper-block-back" class="wrapper-block">
-    <div id="j-stage-block-back" class="stage-block-back">
-        <img src="http://i2.muimg.com/4851/24d05b63045ffd02.jpg" ondragstart="return false" class="wrapper-img j-wrapper-img-back"/>
-        <canvas id="wrapper-cvs" class="wrapper-cvs"></canvas>
+<div class="j-sky-block">
+    <div id="j-wrapper-block-back" class="wrapper-block">
+        <div id="j-stage-block-back" class="stage-block-back">
+            <img src="http://i2.muimg.com/4851/24d05b63045ffd02.jpg" ondragstart="return false"
+                 class="wrapper-img j-wrapper-img-back"/>
+            <canvas id="wrapper-cvs" class="wrapper-cvs j-wrapper-cvs"></canvas>
+        </div>
+    </div>
+    <div class="wrapper-block-main j-wrapper-block-main">
+        <div class="stage-block-main j-stage-block-main">
+            <div class="stage-box-earth j-stage-box-earth">
+                <img src="http://i2.muimg.com/4851/30acc09acf1e627f.png" alt="" class="j-stage-img-earth">
+            </div>
+            <div class="wrapper-box-link">呵呵</div>
+        </div>
     </div>
 </div>
-<div class="wrapper-block-main j-wrapper-block-main">
-    <div class="stage-block-main j-stage-block-main">
-        <div class="stage-box-earth j-stage-box-earth">
-            <img src="http://i2.muimg.com/4851/30acc09acf1e627f.png" alt="" class="j-stage-img-earth">
-        </div>
-        <div class="wrapper-box-link">呵呵</div>
-    </div>
+
+<div class="intro-block j-intro-block hide">
+    <div class="style-block"></div>
+    <pre class="display-block">
+    </pre>
+    <div class="intro-box"></div>
 </div>
 
 <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
@@ -104,7 +114,7 @@
         return usablePrefixMethod;
     };
 
-    (function (Cookie,runPrefixMethod) {
+    var prmFirst = new Promise(function (resolve) {
         var step = 0;
         var isLoaded = false;
         var lastSum = 0;
@@ -176,15 +186,6 @@
             document.getElementsByClassName('j-welcome-box-btn')[0].classList.add('show');
         }
 
-        document.getElementsByClassName('j-welcome-box-btn')[0].addEventListener('click',function () {
-            if(!Cookie.get('finished')){
-                Cookie.set('finished','1',1);
-            }
-            runPrefixMethod(document.documentElement, "RequestFullScreen");
-            step2();
-            step2 = null;
-        });
-
         function step2() {
             step = 1;
 
@@ -217,13 +218,17 @@
                         });
 
                         makeSky.backToStart(function () {
+                            $('.j-wrapper-cvs').fadeOut(1000);
                             $('#j-wrapper-block-back').css('perspective','none');
 
                             bi1.makeBreak();
                             bi2.makeBreak();
+                            mv.slow();
 
                             setTimeout(function () {
-                                $('.j-wrapper-block-main').remove();
+                                $('.j-sky-block').remove();
+                                $('.j-intro-block').removeClass('hide');
+                                setTimeout(resolve,2000);
                             }, 1000);
                         });
                     });
@@ -244,6 +249,15 @@
             }, 2000);
         }
 
+        document.getElementsByClassName('j-welcome-box-btn')[0].addEventListener('click',function () {
+            if(!Cookie.get('finished')){
+                Cookie.set('finished','1',1);
+            }
+            runPrefixMethod(document.documentElement, "RequestFullScreen");
+            step2();
+            step2 = null;
+        });
+
         document.body.addEventListener("dblclick", function() {
             if (runPrefixMethod(document, "FullScreen") || runPrefixMethod(document, "IsFullScreen")) {
                 runPrefixMethod(document, "CancelFullScreen");
@@ -252,7 +266,69 @@
             }
         });
 
-    })(Cookie,runPrefixMethod);
+    });
+
+    prmFirst.then(function () {
+        return new Promise(function (resolve) {
+            var code =
+                `
+/* ......
+* 厉害了我的哥，这下玩坏了吧！
+* 没办法，那只能重新造一个网页了╮(╯_╰)╭
+*/
+
+/* 首先给所有元素加上过渡效果 */
+* {
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+/* 还是用绚烂的星空背景才有逼格 */
+html,body {
+    background-image: url("//t.cn/Raa7dxT");
+    color: #333;
+}
+/* 好歹还是加个边框吧 */
+.display-block {
+    padding: 10px;
+    border: 2px solid rgb(0,155,255);
+    margin: 10px;
+    overflow: auto;
+    width: 400px; height: 90vh;
+    float: left;
+    background: rgba(0,155,255,0.5);
+}
+/* 还差一个版块来介绍自己 */
+.intro-box{
+    margin: 10px;
+    padding: 12px;
+    min-height: 110vh;
+    overflow: hidden;
+    background: rgba(0,55,205,0.3);
+}
+/* 使命完成了，给主要的版块让让位置吧 */
+.display-block {
+    transform-origin: 0 50%;
+    -webkit-transform: rotateY(30deg);
+    transform: rotateY(30deg);
+    margin-right: -100px;
+}
+`;
+            var idx = 0;
+            var len = code.length;
+            function appendStyle() {
+                $('.style-block').html('<style>' + code.slice(0,idx++) + '</style>');
+                $('.display-block').text(code.slice(0,idx)).scrollTop(9999);
+                if(idx === len){
+                    resolve();
+                    return;
+                }
+                setTimeout(appendStyle,10);
+            }
+            appendStyle();
+        });
+    }).then(function () {
+        alert('可以写简历了呀');
+    });
 </script>
 </body>
 </html>
