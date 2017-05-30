@@ -9,6 +9,21 @@ html,body{
 body.nocursor{
     cursor: none!important;
 }
+::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+    background-color: #2F73BC;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background-color: #6E8EB7;
+}
+::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background-color: #0D4690;
+}
+
 .welcome-block,.sky-block{
     user-select: none;
     -webkit-user-select: none;
@@ -20,6 +35,9 @@ body.nocursor{
 img{
     vertical-align: top;
 }
+p{
+    margin: .5em 0;
+}
 a{
     color: #fff;
     text-decoration: none;
@@ -29,6 +47,16 @@ a:hover{
 }
 a.ud{
     border-bottom: 1px solid #fff;
+}
+a.img{
+    border-bottom: 1px dashed #fff;
+}
+a.img img{
+    display: none;
+    max-width: 90%;
+}
+a.img:hover img{
+    display: inline;
 }
 .rel{
     position: relative;
@@ -479,6 +507,28 @@ a.ud{
     color: #fff;
 }
 .intro-text-desc{
-    font-size: 16px;
+    font-size: 14px;
     color: #ececec;
+}
+.intro-list-task>li{
+    margin-bottom: 40px;
+}
+.intro-box-hide{
+    visibility: hidden;
+}
+.intro-box-hide.show{
+    animation: show 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes show {
+    0%{
+        visibility: visible;
+        opacity: 0;
+        transform: translate(100px,-20px);
+    }
+    100%{
+        opacity: 1;
+        visibility: visible;
+        transform: translate(0,0);
+    }
 }
