@@ -6,6 +6,37 @@
     <meta name="renderer" content="webkit" />
     <title>Sens World</title>
     <link rel="stylesheet" href="static/css/index.css" />
+    <!--<style>-->
+        <!--html,body {-->
+            <!--background-image: url("//t.cn/Raa7dxT");-->
+            <!--color: #333;-->
+        <!--}-->
+        <!--/* 好歹还是加个边框吧 */-->
+        <!--.display-block {-->
+            <!--padding: 10px;-->
+            <!--border: 2px solid rgb(0,155,255);-->
+            <!--margin: 10px;-->
+            <!--overflow: auto;-->
+            <!--width: 400px; height: 90vh;-->
+            <!--float: left;-->
+            <!--background: rgba(0,155,255,0.5);-->
+        <!--}-->
+        <!--/* 还差一个版块来介绍自己 */-->
+        <!--.intro-box{-->
+            <!--margin: 10px;-->
+            <!--padding: 12px;-->
+            <!--min-height: 110vh;-->
+            <!--overflow: hidden;-->
+            <!--background: rgba(0,100,205,0.5);-->
+        <!--}-->
+        <!--/* 使命完成了，给主要的版块让让位置吧 */-->
+        <!--.display-block {-->
+            <!--transform-origin: 0 50%;-->
+            <!-- -webkit-transform: rotateY(30deg);-->
+            <!--transform: rotateY(30deg);-->
+            <!--margin-right: -100px;-->
+        <!--}-->
+    <!--</style>-->
 </head>
 <body>
 <div class="preload-block">
@@ -36,7 +67,7 @@
         </div>
     </div>
 </div>
-<div class="j-sky-block">
+<div class="sky-block j-sky-block">
     <div id="j-wrapper-block-back" class="wrapper-block">
         <div id="j-stage-block-back" class="stage-block-back">
             <img src="http://i2.muimg.com/4851/24d05b63045ffd02.jpg" ondragstart="return false"
@@ -58,7 +89,30 @@
     <div class="style-block"></div>
     <pre class="display-block">
     </pre>
-    <div class="intro-box"></div>
+    <div class="intro-box">
+        <div class="intro-box-main j-intro-box-main hide">
+            <p>&emsp;&emsp;我叫陈思旭，15年毕业于重庆理工大学计算机科学与技术学院</p>
+            <p>&emsp;&emsp;15年年初开始在猪八戒网络有限公司品牌市场相关部门从事前端开发工作</p>
+            <p>&emsp;&emsp;擅长页面重构、动画（css、js、canvas）</p>
+            <p>&emsp;&emsp;在公司主要做品牌活动相关页面的开发以及外投用的下单页面的开发</p>
+            <p>&emsp;&emsp;平时工作用到的框架技术FIS-Plus、Vue、Nodejs</p>
+            <h3>&emsp;&emsp;参与的部分项目：</h3>
+            <ul class="intro-list-task">
+                <li>
+                    <p class="c-fff">2015：<a class="ud" href="http://cyy.zbj.com/" target="_blank">猪八戒进产业园官网+线下产业园</a>+微信版产业园 ---（ps：均已停止维护有1年之久）</p>
+                    <p class="intro-text-desc">主要功能有面向客户提供企业注册申请功能；<br>
+                        面向运营人员提供新闻的配置和显示功能；<br>
+                        面向运营人员提供线下园区的配置和显示功能</p>
+                </li>
+                <li>
+
+                </li>
+                <li>
+
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 <script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
@@ -218,6 +272,7 @@
                         });
 
                         makeSky.backToStart(function () {
+                            $('body').addClass('nocursor');
                             $('.j-wrapper-cvs').fadeOut(1000);
                             $('#j-wrapper-block-back').css('perspective','none');
 
@@ -228,7 +283,7 @@
                             setTimeout(function () {
                                 $('.j-sky-block').remove();
                                 $('.j-intro-block').removeClass('hide');
-                                setTimeout(resolve,2000);
+                                setTimeout(resolve,3000);
                             }, 1000);
                         });
                     });
@@ -322,12 +377,12 @@ html,body {
                     resolve();
                     return;
                 }
-                setTimeout(appendStyle,10);
+                setTimeout(appendStyle,30);
             }
             appendStyle();
         });
     }).then(function () {
-        alert('可以写简历了呀');
+        $('body').removeClass('nocursor');
     });
 </script>
 </body>
