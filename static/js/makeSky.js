@@ -43,8 +43,17 @@ var addEvent = (function(window, undefined) {  //强行模仿jQuery源码 - -
 
 var makeSky = (function (doc, window, addEvent) {
     //还是兼容一下国产浏览器用低版本chrome内核的情况吧。。。
-    var REQ = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
-    var cancelREQ = window.cancelRequestAnimationFrame || window.webkitCancelRequestAnimationFrame;
+    var REQ = window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame;
+    var cancelREQ = window.cancelRequestAnimationFrame
+        || window.webkitCancelAnimationFrame
+        || window.webkitCancelRequestAnimationFrame
+        || window.mozCancelRequestAnimationFrame
+        || window.oCancelRequestAnimationFrame
+        || window.msCancelRequestAnimationFrame;
     var tReq = null;
     var flagStop = false;
 
@@ -246,7 +255,7 @@ var makeSky = (function (doc, window, addEvent) {
         })
     }
     function stop() {
-        cancelREQ(tReq);
+        cancelREQ && cancelREQ(tReq);
         flagStop = true;
     }
     function backToStart(fun) {
