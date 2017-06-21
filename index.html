@@ -344,7 +344,7 @@
             }
             runPrefixMethod(document.documentElement, "RequestFullScreen");
             step2();
-            step2 = null;
+            step2 = function () {};
         });
 
         document.body.addEventListener("dblclick", function() {

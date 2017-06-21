@@ -48,7 +48,9 @@ var makeSky = (function (doc, window, addEvent) {
         window.mozRequestAnimationFrame ||
         window.oRequestAnimationFrame ||
         window.msRequestAnimationFrame;
-    var cancelREQ = window.cancelRequestAnimationFrame
+    var cancelREQ =
+        window.cancelRequestAnimationFrame
+        || window.cancelAnimationFrame
         || window.webkitCancelAnimationFrame
         || window.webkitCancelRequestAnimationFrame
         || window.mozCancelRequestAnimationFrame
