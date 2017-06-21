@@ -493,7 +493,7 @@ a.img:hover img{
 .intro-block{
     overflow: hidden;
     perspective: 1000px;
-    perspective-origin: 10px 50%;
+    perspective-origin: 10px 400px;
 }
 .display-block{
     color: #fff;
