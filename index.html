@@ -280,8 +280,11 @@
             if(isLoaded){
                 mv.start();
             }
+            setTimeout(function () {
+                runPrefixMethod(document.documentElement, "RequestFullScreen");
+                document.getElementsByClassName('j-welcome-block')[0].classList.add('fadeout');
+            },1000);
 
-            document.getElementsByClassName('j-welcome-block')[0].classList.add('fadeout');
             makeSky.init(function (far) {
                 if (step === 1 && far > 200) {
                     step = 2;
@@ -346,7 +349,7 @@
             if(!Cookie.get('finished')){
                 Cookie.set('finished','1',1);
             }
-            runPrefixMethod(document.documentElement, "RequestFullScreen");
+
             step2();
             step2 = function () {};
         });
