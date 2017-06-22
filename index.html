@@ -312,7 +312,11 @@
 
                             bi1.makeBreak();
                             bi2.makeBreak();
-                            mv.slow();
+
+                            try {
+                                mv.slow(); //有时候直到现在 音乐都没有加载完
+                            }
+                            catch (e){}
 
                             setTimeout(function () {
                                 $('.j-sky-block').remove();
