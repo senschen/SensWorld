@@ -290,6 +290,17 @@ a.img:hover img{
         opacity: 1;
     }
 }
+.welcome-text-add{
+    position: absolute;
+    width: 140px;
+    top: 270px;
+    text-decoration: underline;
+    text-align: center;
+}
+.welcome-text-add a{
+    color: #ff7900;
+    font-size: 16px;
+}
 
 .wrapper-block{
     position: fixed;
